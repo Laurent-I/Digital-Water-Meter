@@ -6,7 +6,7 @@ import pytesseract
 pytesseract.pytesseract.tesseract_cmd = r"D:\Tesseract-OCR\tesseract.exe"
 
 # Load the image from file
-image_path = r"Screenshot 2024-01-15 210808.png"
+image_path = r"1.jpg"
 # print(image_path)
 image = cv2.imread(image_path)
 
@@ -20,6 +20,9 @@ if os.access(image_path, os.R_OK):
 
     # Apply thresholding
     _, thresholded_image = cv2.threshold(gray_image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+
+    # Specify PSM and OEM
+    custom_config = r'--oem 3 --psm 6'
 
     # Use Tesseract to extract text
     extracted_text = pytesseract.image_to_string(thresholded_image)
